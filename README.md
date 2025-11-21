@@ -1,75 +1,28 @@
-- 👋 Hi, I’m @venugopaldevarapalli
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
+<!-- Typing Header -->
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?size=28&duration=3000&color=1A9AF7&center=true&vCenter=true&lines=DevOps+Engineer;Cloud+%7C+AWS+%7C+Azure;Kubernetes+%7C+Docker;CI%2FCD+%7C+Terraform+%7C+IaC;Automation+Enthusiast" />
+</p>
 
-<!---
-venugopaldevarapalli/venugopaldevarapalli is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
-#!/usr/bin/env python
+<h1 align="center">Hi 👋, I'm Venugopal Devarapalli</h1>
+<h3 align="center">🚀 DevOps Engineer | Cloud Architect | Kubernetes & Automation Specialist</h3>
 
-import boto3
-from datetime import datetime, timedelta
-import sys
-import argparse
+---
 
-parser = argparse.ArgumentParser('Add your team')
-parser.add_argument('-t', '--team', type=str, help='Team name"', required=True)
-args = parser.parse_args()
+## 🌟 About Me
 
-client = boto3.client('resourcegroupstaggingapi')
+I’m a **DevOps Engineer with 5+ years of experience** building scalable, secure, cloud-native infrastructure on **AWS, Azure, and Kubernetes**.  
 
-ret_val = 0
-paginator = client.get_paginator('get_resources')
-pages = paginator.paginate(
-    TagFilters=[
-        {
-            'Key': 'Environment',
-            'Values': [
-                'Production'
-            ],
-            'Key': 'Team',
-            'Values': [
-                '{}'.format(args.team)
-            ]
-        }
-    ],
-    ResourceTypeFilters=[
-        'lambda',
-    ],
-)
+My work revolves around:
 
-for page in pages:
-    for obj in page['ResourceTagMappingList']:
-      lambda_list = (obj["ResourceARN"].split(':', 7 )[-1])
+- Automating deployments & CI/CD  
+- Containerization using Docker  
+- Kubernetes orchestration for scalable workloads  
+- Infrastructure as Code using Terraform & CloudFormation  
+- Monitoring, alerting & performance tuning  
+- 24/7 production support & incident response  
 
-      num = 0.0
-      cloudwatch = boto3.client('cloudwatch')
-      met = cloudwatch.get_metric_statistics(Namespace='AWS/Lambda',
-      StartTime=datetime.now() - timedelta(minutes=10),
-          Dimensions=[
-              {
-                  'Name': 'FunctionName',
-                  'Value': lambda_list
-              },
-          ],
-          EndTime=datetime.now(),
-          Period=60,
-          MetricName="Errors",
-          Statistics=['Sum'])
-      if len(met['Datapoints']) == 0:
-          True
-      else:
-          for s in met['Datapoints']:
-              num = num + s['Sum']
-          if int(num) > 1000:
-              ret_val = ret_val + 1
-          print("{}: {} Errors".format(lambda_list, num))
+I love turning complex problems into clean, automated, repeatable solutions.  
 
-if ret_val == 0:
-    sys.exit(0)
-else:
-    print("One of the Lambda function has errors over 1k within the last 10 mins, please escalate to {}".format(args.team))
-    sys.exit(2)
+---
+
+## 🚀 DevOps Pipeline (My Workflow)
